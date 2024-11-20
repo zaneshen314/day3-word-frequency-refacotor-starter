@@ -18,32 +18,19 @@ public class WordFrequencyGame {
         }
     }
 
-    private List<WordFrequency> getInitialWordFrequencies(String inputStr) {
-        String[] words = inputStr.split(SPACE_REGEX);
-        return Arrays.stream(words)
-                .map(word -> new WordFrequency(word, 1))
-                .toList();
-    }
-
     private List<WordFrequency> getWordFrequencies(String inputStr) {
-        List<WordFrequency> frequencies = getInitialWordFrequencies(inputStr);
-
-        Map<String, List<WordFrequency>> wordToWordFrequenciesMap = getWorkFrequencyMap(frequencies);
-
-        return wordToWordFrequenciesMap.entrySet().stream()
+        return Arrays.stream(inputStr.split(SPACE_REGEX))
+                .collect(Collectors.groupingBy(word -> word))
+                .entrySet().stream()
                 .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
                 .toList();
     }
+
 
     private String buildResult(List<WordFrequency> frequencies) {
         return frequencies.stream()
                 .sorted(Comparator.comparingInt(WordFrequency::getWordCount).reversed())
                 .map(w -> w.getWord() + " " + w.getWordCount())
                 .collect(Collectors.joining(LINE_BREAK));
-    }
-
-    private static Map<String, List<WordFrequency>> getWorkFrequencyMap(List<WordFrequency> wordFrequencyList) {
-        return wordFrequencyList.stream()
-                .collect(Collectors.groupingBy(WordFrequency::getWord, Collectors.toCollection(ArrayList::new)));
     }
 }

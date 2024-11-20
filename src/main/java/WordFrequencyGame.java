@@ -10,10 +10,8 @@ public class WordFrequencyGame {
         if (inputStr.split(SPACE_REGEX).length == 1) {
             return inputStr + " 1";
         }
-
         try {
-            List<WordFrequency> frequencies = getInitialWordFrequencies(inputStr);
-            frequencies = getWordFrequencies(frequencies);
+            List<WordFrequency> frequencies = getWordFrequencies(inputStr);
             return buildResult(frequencies);
         } catch (Exception e) {
             return ERROR_MSG;
@@ -27,7 +25,9 @@ public class WordFrequencyGame {
                 .toList();
     }
 
-    private List<WordFrequency> getWordFrequencies(List<WordFrequency> frequencies) {
+    private List<WordFrequency> getWordFrequencies(String inputStr) {
+        List<WordFrequency> frequencies = getInitialWordFrequencies(inputStr);
+
         Map<String, List<WordFrequency>> wordToWordFrequenciesMap = getWorkFrequencyMap(frequencies);
 
         return wordToWordFrequenciesMap.entrySet().stream()

@@ -11,14 +11,9 @@ public class WordFrequencyGame {
             return inputStr + " 1";
         } else {
             try {
-                //split the input string with 1 to n pieces of spaces
-                String[] words = inputStr.split(SPACE_REGEX);
-
-                List<WordFrequency> frequencies = getInitialWordFrequencies(words);
-
+                List<WordFrequency> frequencies = getInitialWordFrequencies(inputStr);
                 //get the map for the next step of sizing the same word
                 frequencies = getWordFrequencies(frequencies);
-
                 return buildResult(frequencies);
             } catch (Exception e) {
                 return ERROR_MSG;
@@ -26,13 +21,15 @@ public class WordFrequencyGame {
         }
     }
 
-    private static List<WordFrequency> getInitialWordFrequencies(String[] words) {
+    private List<WordFrequency> getInitialWordFrequencies(String inputStr) {
+        //split the input string with 1 to n pieces of spaces
+        String[] words = inputStr.split(SPACE_REGEX);
         return Arrays.stream(words)
                 .map(word -> new WordFrequency(word, 1))
                 .toList();
     }
 
-    private static List<WordFrequency> getWordFrequencies(List<WordFrequency> frequencies) {
+    private List<WordFrequency> getWordFrequencies(List<WordFrequency> frequencies) {
         Map<String, List<WordFrequency>> wordToWordFrequenciesMap = getWorkFrequencyMap(frequencies);
 
         return wordToWordFrequenciesMap.entrySet().stream()
@@ -40,7 +37,7 @@ public class WordFrequencyGame {
                 .toList();
     }
 
-    private static String buildResult(List<WordFrequency> frequencies) {
+    private String buildResult(List<WordFrequency> frequencies) {
         return frequencies.stream()
                 .sorted(Comparator.comparingInt(WordFrequency::getWordCount).reversed())
                 .map(w -> w.getWord() + " " + w.getWordCount())

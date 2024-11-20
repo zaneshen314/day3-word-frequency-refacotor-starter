@@ -9,14 +9,14 @@ public class WordFrequencyGame {
     public String getWordFrequency(String inputStr) {
         if (inputStr.split(SPACE_REGEX).length == 1) {
             return inputStr + " 1";
-        } else {
-            try {
-                List<WordFrequency> frequencies = getInitialWordFrequencies(inputStr);
-                frequencies = getWordFrequencies(frequencies);
-                return buildResult(frequencies);
-            } catch (Exception e) {
-                return ERROR_MSG;
-            }
+        }
+
+        try {
+            List<WordFrequency> frequencies = getInitialWordFrequencies(inputStr);
+            frequencies = getWordFrequencies(frequencies);
+            return buildResult(frequencies);
+        } catch (Exception e) {
+            return ERROR_MSG;
         }
     }
 

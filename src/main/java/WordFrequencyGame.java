@@ -7,19 +7,19 @@ public class WordFrequencyGame {
     public static final String ERROR_MSG = "Calculate Error";
     public static final String SPACE_BREAK =  " ";
 
-    public String getWordFrequency(String inputStr) {
-        if (inputStr.split(SPACE_REGEX).length == 1) {
-            return inputStr + " 1";
+    public String getWordFrequency(String sentence) {
+        if (sentence.split(SPACE_REGEX).length == 1) {
+            return sentence + " 1";
         }
         try {
-            return getWordFrequencies(inputStr);
+            return getWordFrequencies(sentence);
         } catch (Exception e) {
             return ERROR_MSG;
         }
     }
 
-    private String getWordFrequencies(String inputStr) {
-        return Arrays.stream(inputStr.split(SPACE_REGEX))
+    private String getWordFrequencies(String sentence) {
+        return Arrays.stream(sentence.split(SPACE_REGEX))
                 .collect(Collectors.groupingBy(word -> word))
                 .entrySet().stream()
                 .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))

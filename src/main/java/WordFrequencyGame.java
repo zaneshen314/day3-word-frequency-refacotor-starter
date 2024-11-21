@@ -6,12 +6,12 @@ public class WordFrequencyGame {
     public static final String LINE_BREAK = "\n";
     public static final String ERROR_MSG = "Calculate Error";
     public static final String SPACE_BREAK =  " ";
-    public static final String DEFAULT_COUNT = " 1";
+    public static final Integer DEFAULT_COUNT_INT =1;
 
     public String getWordFrequency(String sentence) {
         try {
             String[] sentenceArray = sentence.split(SPACE_REGEX);
-            return sentenceArray.length == 1 ?  sentence + DEFAULT_COUNT :getWordFrequencies(sentenceArray);
+            return sentenceArray.length == DEFAULT_COUNT_INT ?  sentence + SPACE_BREAK + DEFAULT_COUNT_INT:getWordFrequencies(sentenceArray);
         } catch (Exception e) {
             return ERROR_MSG + e.getMessage();
         }

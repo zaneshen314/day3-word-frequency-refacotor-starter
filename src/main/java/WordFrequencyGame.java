@@ -12,25 +12,21 @@ public class WordFrequencyGame {
             return inputStr + " 1";
         }
         try {
-            List<WordFrequency> frequencies = getWordFrequencies(inputStr);
-            return buildResult(frequencies);
+            return getWordFrequencies(inputStr);
         } catch (Exception e) {
             return ERROR_MSG;
         }
     }
 
-    private List<WordFrequency> getWordFrequencies(String inputStr) {
+    private String getWordFrequencies(String inputStr) {
         return Arrays.stream(inputStr.split(SPACE_REGEX))
                 .collect(Collectors.groupingBy(word -> word))
                 .entrySet().stream()
                 .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
-                .toList();
-    }
-
-    private String buildResult(List<WordFrequency> frequencies) {
-        return frequencies.stream()
                 .sorted(Comparator.comparingInt(WordFrequency::getWordCount).reversed())
                 .map(w -> w.getWord() + SPACE_BREAK + w.getWordCount())
                 .collect(Collectors.joining(LINE_BREAK));
     }
+
+
 }

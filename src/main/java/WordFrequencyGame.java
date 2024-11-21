@@ -12,8 +12,7 @@ public class WordFrequencyGame {
             String[] sentenceArray = sentence.split(SPACE_REGEX);
             return sentenceArray.length == 1 ?  sentence + " 1" :getWordFrequencies(sentenceArray);
         } catch (Exception e) {
-            // TODO MORE MSG
-            return ERROR_MSG;
+            return ERROR_MSG + e.getMessage();
         }
     }
 

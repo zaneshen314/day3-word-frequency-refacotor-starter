@@ -13,8 +13,8 @@ public class WordFrequencyGame {
                     .collect(Collectors.groupingBy(word -> word))
                     .entrySet().stream()
                     .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
-                    .sorted(Comparator.comparingInt(WordFrequency::getWordCount).reversed())
-                    .map(w -> w.getWord() + SPACE_BREAK + w.getWordCount())
+                    .sorted(Comparator.comparingInt(WordFrequency::getCount).reversed())
+                    .map(w -> w.getWord() + SPACE_BREAK + w.getCount())
                     .collect(Collectors.joining(LINE_BREAK));
         } catch (Exception e) {
             return ERROR_MSG + e.getMessage();

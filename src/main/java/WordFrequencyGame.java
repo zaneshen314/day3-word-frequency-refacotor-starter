@@ -8,9 +8,6 @@ public class WordFrequencyGame {
     public static final String SPACE_BREAK =  " ";
 
     public String getWordFrequency(String sentence) {
-        if (sentence.split(SPACE_REGEX).length == 1) {
-            return sentence + " 1";
-        }
         try {
             return getWordFrequencies(sentence);
         } catch (Exception e) {
@@ -19,6 +16,9 @@ public class WordFrequencyGame {
     }
 
     private String getWordFrequencies(String sentence) {
+        if (sentence.split(SPACE_REGEX).length == 1) {
+            return sentence + " 1";
+        }
         return Arrays.stream(sentence.split(SPACE_REGEX))
                 .collect(Collectors.groupingBy(word -> word))
                 .entrySet().stream()

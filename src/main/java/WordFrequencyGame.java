@@ -27,7 +27,6 @@ public class WordFrequencyGame {
                 .toList();
     }
 
-
     private String buildResult(List<WordFrequency> frequencies) {
         return frequencies.stream()
                 .sorted(Comparator.comparingInt(WordFrequency::getWordCount).reversed())

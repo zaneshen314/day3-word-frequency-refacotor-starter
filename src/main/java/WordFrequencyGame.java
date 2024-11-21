@@ -9,17 +9,16 @@ public class WordFrequencyGame {
 
     public String getWordFrequency(String sentence) {
         try {
-            return getWordFrequencies(sentence);
+            String[] sentenceArray = sentence.split(SPACE_REGEX);
+            return sentenceArray.length == 1 ?  sentence + " 1" :getWordFrequencies(sentenceArray);
         } catch (Exception e) {
+            // TODO MORE MSG
             return ERROR_MSG;
         }
     }
 
-    private String getWordFrequencies(String sentence) {
-        if (sentence.split(SPACE_REGEX).length == 1) {
-            return sentence + " 1";
-        }
-        return Arrays.stream(sentence.split(SPACE_REGEX))
+    private String getWordFrequencies(String[] SentenceArray) {
+        return Arrays.stream(SentenceArray)
                 .collect(Collectors.groupingBy(word -> word))
                 .entrySet().stream()
                 .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
